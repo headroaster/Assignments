@@ -2,7 +2,7 @@ import wx
 
 class Mywin(wx.Frame):
    def __init__(self, parent, title):
-      super(Mywin, self).__init__(parent, title = title,size = (340,475))
+      super(Mywin, self).__init__(parent, title = title,size = (345,475))
 
       panel = wx.Panel(self)
       vbox = wx.BoxSizer(wx.VERTICAL)
@@ -79,7 +79,7 @@ class Mywin(wx.Frame):
       vbox.Add(hbox9)
       self.t9.Bind(wx.EVT_TEXT_ENTER,self.OnEnterPressed)
 
-      self.btn = wx.Button(panel, -1, "click Me")
+      self.btn = wx.Button(panel, -1, "Add This to Notes")
       vbox.Add(self.btn,0,wx.ALIGN_CENTER)
 
 
@@ -100,5 +100,5 @@ class Mywin(wx.Frame):
       print ("Maximum length reached")
 
 app = wx.App()
-Mywin(None,  'Ticket Maker')
+Mywin(None,  'Note Taker')
 app.MainLoop()
