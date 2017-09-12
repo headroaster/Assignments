@@ -2,7 +2,7 @@ import wx
 
 class Mywin(wx.Frame):
    def __init__(self, parent, title):
-      super(Mywin, self).__init__(parent, title = title,size = (345,475))
+      super(Mywin, self).__init__(parent, title = title,size = (345,475), style= wx.CAPTION | wx.CLOSE_BOX)
 
       panel = wx.Panel(self)
       self.SetBackgroundColour(wx.BLACK)
