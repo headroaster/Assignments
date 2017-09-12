@@ -68,7 +68,7 @@ class Example(wx.Frame):
                 pass
 
     def OnClose(self, e):
-
+        
         self.Close(True)
 
 
