@@ -18,4 +18,4 @@ def __init__(self, parent):
 
 def on_quit(self, event):
     """docstring for on"""
-    self.frame.Close()
+    
