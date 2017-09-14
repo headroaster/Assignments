@@ -1,0 +1,65 @@
+
+*********************************************************
+Customer Name: sdfasdf
+TID:  asdf
+Call Driver: asdf
+Caller's Name: sdfasdf
+Phone Number: asdf
+Serial Number: asdfasdfsadf
+Street Address: sadf
+ZIP or Postal Code: sadfasdf
+Notes: fsadfas
+
+*********************************************************
+
+*********************************************************
+Customer Name: asfdasdf
+TID:  
+Call Driver: sadfasdf
+Caller's Name: 
+Phone Number: asdfasd
+Serial Number: asdfasdf
+Street Address: asd
+ZIP or Postal Code: 
+Notes: fsdfa 
+
+*********************************************************
+
+*********************************************************
+Customer Name: Fishing
+TID:  spook
+Call Driver: lsdkfjl;k
+Caller's Name: namnes
+Phone Number: numbers 
+Serial Number: words
+Street Address: words
+ZIP or Postal Code:  numbers 
+Notes: short story
+
+*********************************************************
+
+*********************************************************
+Customer Name: Fishing
+TID:  spook
+Call Driver: lsdkfjl;k
+Caller's Name: namnes
+Phone Number: numbers 
+Serial Number: words
+Street Address: words
+ZIP or Postal Code:  numbers 
+Notes: short story
+
+*********************************************************
+
+*********************************************************
+Customer Name: Fishing
+TID:  spook
+Call Driver: lsdkfjl;k
+Caller's Name: namnes
+Phone Number: numbers 
+Serial Number: words
+Street Address: words
+ZIP or Postal Code:  numbers 
+Notes: short story
+
+*********************************************************

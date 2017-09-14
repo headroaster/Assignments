@@ -1,0 +1,13 @@
+
+*********************************************************
+Customer Name: Fishing
+TID:  spook
+Call Driver: lsdkfjl;k
+Caller's Name: namnes
+Phone Number: numbers 
+Serial Number: words
+Street Address: words
+ZIP or Postal Code:  numbers 
+Notes: short story
+
+*********************************************************

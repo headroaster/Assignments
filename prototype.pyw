@@ -1,12 +1,13 @@
 import wx
+import datetime
 
 class Mywin(wx.Frame):
    def __init__(self, parent, title):
       super(Mywin, self).__init__(parent, title = title,size = (345,475), style= wx.CAPTION | wx.CLOSE_BOX)
 
+
       panel = wx.Panel(self)
       self.SetBackgroundColour(wx.BLACK)
-
 
 
       vbox = wx.BoxSizer(wx.VERTICAL)
@@ -94,7 +95,7 @@ class Mywin(wx.Frame):
 
       self.btn = wx.Button(panel, -1, "Add This to Notes")
       vbox.Add(self.btn,0,wx.ALIGN_CENTER)
-
+      self.btn.Bind(wx.EVT_BUTTON, self.takeNote)
 
 
       panel.SetSizer(vbox)
@@ -108,6 +109,32 @@ class Mywin(wx.Frame):
 
    def OnEnterPressed(self,event):
       print ("Enter pressed")
+
+   def saveDocument (self):
+     with open("tempNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt", "r") as notes:
+              lines = notes.readlines()
+              with open ("ticketNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt", "a") as finalNotes:
+                  finalNotes.writelines(lines)
+                  notes.close()
+                  finalNotes.close()
+              return
+
+   def takeNote (self, event=None):
+      prompts = ({self.t1 : "Customer Name: ", self.t2 : "TID:  ",
+          self.t3 : "Call Driver: ", self.t5 : "Caller's Name: ",
+          self.t6 : "Phone Number: ", self.t4 : "Serial Number: ",
+          self.t7 : "Street Address: ", self.t8 : "ZIP or Postal Code: ",
+          self.t9 : "Notes: "})
+      with open ("tempNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt", "w") as notes:
+          def border():
+              notes.write("\n*********************************************************\n")
+              return
+          border()
+          for item in prompts:
+              notes.write(prompts[item] + item.GetValue() + "\n")
+          border()
+      self.saveDocument()
+      return
 
 
 app = wx.App()
