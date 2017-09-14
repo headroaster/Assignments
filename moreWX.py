@@ -95,3 +95,6 @@ class MyPanel1 ( wx.Panel ):
 
 	def __del__( self ):
 		pass
+app = wx.App()
+Mywin(None,  'Note Taker')
+app.MainLoop()

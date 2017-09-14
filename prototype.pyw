@@ -6,10 +6,8 @@ class Mywin(wx.Frame):
       super(Mywin, self).__init__(parent, title = title,size = (345,475))
 
 
-
       panel = wx.Panel(self)
       self.SetBackgroundColour(wx.BLACK)
-
 
 
       vbox = wx.BoxSizer(wx.VERTICAL)
@@ -98,8 +96,6 @@ class Mywin(wx.Frame):
       self.btn = wx.Button(panel, -1, "Add This to Notes")
       vbox.Add(self.btn,0,wx.ALIGN_CENTER)
       self.btn.Bind(wx.EVT_BUTTON, self.takeNote)
-
-
 
 
       panel.SetSizer(vbox)
