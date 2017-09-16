@@ -3,23 +3,28 @@ import datetime
 
 class Mywin(wx.Frame):
    def __init__(self, parent, title):
-      super(Mywin, self).__init__(parent, title = title,size = (345,475), style= wx.CAPTION | wx.CLOSE_BOX)
+      super(Mywin, self).__init__(parent, title = title,size = (305,625), style= wx.CAPTION | wx.CLOSE_BOX)
 
 
       panel = wx.Panel(self)
       self.SetBackgroundColour(wx.BLACK)
+      font = wx.Font(10, wx.FONTFAMILY_SCRIPT, wx.SLANT, wx.NORMAL)
+      self.SetFont(font)
 
 
       vbox = wx.BoxSizer(wx.VERTICAL)
 
       hbox1 = wx.BoxSizer(wx.HORIZONTAL)
+
+
+
       l1 = wx.StaticText(panel, -1, "What line did this\n come in on?")
       l1.SetForegroundColour((wx.WHITE))
       hbox1.Add(l1, 1, wx.EXPAND|wx.ALIGN_LEFT|wx.ALL,5)
       self.t1 = wx.TextCtrl(panel)
       hbox1.Add(self.t1,1,wx.EXPAND|wx.ALIGN_LEFT|wx.ALL,5)
       self.t1.Bind(wx.EVT_TEXT,self.OnKeyTyped)
-      vbox.Add(hbox1)
+      vbox.Add(hbox1, 1, wx.EXPAND|wx.ALIGN_LEFT, 5)
 
       hbox2 = wx.BoxSizer(wx.HORIZONTAL)
       l2 = wx.StaticText(panel, -1, "Is the TID available?")
@@ -28,7 +33,7 @@ class Mywin(wx.Frame):
       self.t2 = wx.TextCtrl(panel)
       hbox2.Add(self.t2,1,wx.EXPAND|wx.ALIGN_LEFT|wx.ALL,5)
       self.t2.Bind(wx.EVT_TEXT,self.OnKeyTyped)
-      vbox.Add(hbox2)
+      vbox.Add(hbox2, 1, wx.EXPAND|wx.ALIGN_LEFT, 5)
 
       hbox3 = wx.BoxSizer(wx.HORIZONTAL)
       l3 = wx.StaticText(panel, -1, "Why is this person\n calling you?")
@@ -37,7 +42,7 @@ class Mywin(wx.Frame):
       self.t3 = wx.TextCtrl(panel)
       hbox3.Add(self.t3,1,wx.EXPAND|wx.ALIGN_LEFT|wx.ALL,5)
       self.t3.Bind(wx.EVT_TEXT,self.OnKeyTyped)
-      vbox.Add(hbox3)
+      vbox.Add(hbox3, 1, wx.EXPAND|wx.ALIGN_LEFT, 5)
 
       hbox4 = wx.BoxSizer(wx.HORIZONTAL)
       l4 = wx.StaticText(panel, -1, "Is the safe serial\n available?")
@@ -46,7 +51,7 @@ class Mywin(wx.Frame):
       self.t4 = wx.TextCtrl(panel)
       hbox4.Add(self.t4,1,wx.EXPAND|wx.ALIGN_LEFT|wx.ALL,5)
       self.t4.Bind(wx.EVT_TEXT,self.OnKeyTyped)
-      vbox.Add(hbox4)
+      vbox.Add(hbox4, 1, wx.EXPAND|wx.ALIGN_LEFT, 5)
 
       hbox5 = wx.BoxSizer(wx.HORIZONTAL)
       l5 = wx.StaticText(panel, -1, "Callers name?")
@@ -55,7 +60,7 @@ class Mywin(wx.Frame):
       self.t5 = wx.TextCtrl(panel)
       hbox5.Add(self.t5,1,wx.EXPAND|wx.ALIGN_LEFT|wx.ALL,5)
       self.t5.Bind(wx.EVT_TEXT,self.OnKeyTyped)
-      vbox.Add(hbox5)
+      vbox.Add(hbox5, 1, wx.EXPAND|wx.ALIGN_LEFT, 5)
 
       hbox6 = wx.BoxSizer(wx.HORIZONTAL)
       l6 = wx.StaticText(panel, -1, "Callback Number?")
@@ -64,7 +69,7 @@ class Mywin(wx.Frame):
       self.t6 = wx.TextCtrl(panel)
       hbox6.Add(self.t6,1,wx.EXPAND|wx.ALIGN_LEFT|wx.ALL,5)
       self.t6.Bind(wx.EVT_TEXT,self.OnKeyTyped)
-      vbox.Add(hbox6)
+      vbox.Add(hbox6, 1, wx.EXPAND|wx.ALIGN_LEFT, 5)
 
       hbox7 = wx.BoxSizer(wx.HORIZONTAL)
       l7 = wx.StaticText(panel, -1, "Street Address?")
@@ -73,7 +78,7 @@ class Mywin(wx.Frame):
       self.t7 = wx.TextCtrl(panel)
       hbox7.Add(self.t7,1,wx.EXPAND|wx.ALIGN_LEFT|wx.ALL,5)
       self.t7.Bind(wx.EVT_TEXT,self.OnKeyTyped)
-      vbox.Add(hbox7)
+      vbox.Add(hbox7, 1, wx.EXPAND|wx.ALIGN_LEFT, 5)
 
       hbox8 = wx.BoxSizer(wx.HORIZONTAL)
       l8 = wx.StaticText(panel, -1, "Zip Code?")
@@ -82,7 +87,7 @@ class Mywin(wx.Frame):
       self.t8 = wx.TextCtrl(panel)
       hbox8.Add(self.t8,1,wx.EXPAND|wx.ALIGN_LEFT|wx.ALL,5)
       self.t8.Bind(wx.EVT_TEXT,self.OnKeyTyped)
-      vbox.Add(hbox8)
+      vbox.Add(hbox8, 1, wx.EXPAND|wx.ALIGN_LEFT, 5)
 
       hbox9 = wx.BoxSizer(wx.HORIZONTAL)
       l9 = wx.StaticText(panel, -1, "What did you do,\n or what needs\n to be done?")
