@@ -284,7 +284,8 @@ class Mywin(wx.Frame):
       self.Fit()
 
    def OnKeyTyped(self, event):
-      print (event.GetString())
+      #print (event.GetString())
+      pass
 
 
    def OnEnterPressed(self, event):
@@ -331,7 +332,7 @@ class Mywin(wx.Frame):
    def ticket(self, event=None):
 
        website = "http://test.pendum.com/ServiceCenter/ServiceCallDetail.aspx?type=serviceC"
-       inputNotes = gatherNotes()
+
      #This gathers your username, and password.
        userUName = "dcretan"
        userPWord = "BURR2015"
@@ -339,7 +340,8 @@ class Mywin(wx.Frame):
 
      #This opens and signs in to the website for work
        login(website, userUName, userPWord)
-
+       global inputNotes
+       inputNotes = gatherNotes()
      #This opens a phone support ticket making sure we're opening a ticket for a valid customer
        getTarget()
        makeTicket()
