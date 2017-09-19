@@ -42,16 +42,5 @@ def saveDocument (self):
 
 
 
-                 '''hbox10 = wx.BoxSizer(wx.HORIZONTAL)
-                    hbox10.AddSpacer(5)
-                    self.btn2 = wx.Button(panel, -1, "Clear")
-                    hbox10.Add(self.btn2, 1, wx.ALIGN_LEFT)
-                    #self.btn2.Bind(wx.EVT_BUTTON, self.clear)
-                    hbox10.AddSpacer(80)
-                    self.btn = wx.Button(panel, -1, "Add This to Notes")
-                    hbox10.Add(self.btn, 1, wx.ALIGN_RIGHT)
-                    #self.btn.Bind(wx.EVT_BUTTON, self.takeNote)
-                    hbox10.AddSpacer(5)
-                    vbox.Add(hbox10)
-
-                    #self.btn.Bind(wx.EVT_BUTTON, self.Clear())'''
+for item in inputNotes:
+      	print(str.split(inputNotes[item][0], ': ')[0], str.split(inputNotes[item][0], ': ')[1])
