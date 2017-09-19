@@ -26,8 +26,7 @@ def gatherNotes (event = None):
     inputs = []
     with open (os.path.expanduser("~/Documents/notes/tempNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt"), "r") as notes:
         for line in notes:
-            inputs.append(line.rstrip("\n"))
-
+            inputs.append(line)
         gathered = {}
         for item in inputs:
             gathered[inputs.index(item)+1] = item
@@ -59,23 +58,24 @@ def getTarget ():
  _Address = ""
  _Zip = ""
 
- if str.split(inputNotes[1][0], ': ')[1] in linesOfBiz:
-     _customer = linesOfBiz[str.split(inputNotes[1][0], ': ')[1]]
-     _customerName = str.split(inputNotes[1][0], ': ')[1]
+ if inputNotes[3] in linesOfBiz:
+     _customer = linesOfBiz[inputNotes[3]]
+     _customerName = inputNotes[3]
 
  else:
      _customer = ("")
 
- if str.split(inputNotes[2][0], ': ')[1] != (""):
-     _TID = str.split(inputNotes[2][0], ': ')[1]
+ if inputNotes[4] != (""):
+     _TID = inputNotes[4]
      #_customer = ""
+
  else:
      _TID = ("phone support")
 
  if _customer != ("") or _customer not in tidels:
      pass
  else:
-     _Serial = str.split(inputNotes[6][0], ': ')[1]
+     _Serial = inputNotes[8]
      _customer = ("")
 
  #This selects for either a specific or generic ticket using any combination of the 6 available fields.
@@ -120,11 +120,13 @@ def documentThis ():
      "address" : "Street Address: ", "zip" : "ZIP or Postal Code: ",
      "notes" : "Notes: "}
  with open ("C:/Users/cretand/Documents/notes/tempNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt", "w") as notes:
-
-
+     def border():
+         notes.write("\n*********************************************************\n")
+         return
+     border()
      for item in prompts:
          notes.write(prompts[item]+inputNotes[item]+ "\n")
-
+     border()
  saveDocument()
  return
 
@@ -147,10 +149,10 @@ def documentThat ():
      def border():
          notes.write("\n*********************************************************\n")
          return
-
+     border()
      for item in headers:
              notes.write(headers[item][0] + headers[item][1])
-
+     border()
      print("Created: " + driver.find_element_by_id("MainContent_ChildContent1_lstViewResult_lblServiceCall_0").text)
      notes.close()
  saveDocument()
@@ -290,18 +292,13 @@ class Mywin(wx.Frame):
 
 
    def saveDocument (self):
-       def border():
-           notes.write("\n*********************************************************\n")
-           return
-       with open(os.path.expanduser("~/Documents/notes/tempNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt"), "r") as notes:
-                lines = notes.readlines()
-                with open (os.path.expanduser("~/Documents/notes/ticketNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt"), "a") as finalNotes:
-                    border()
-                    finalNotes.writelines(lines)
-                    border()
-                    notes.close()
-                    finalNotes.close()
-                return
+     with open(os.path.expanduser("~/Documents/notes/tempNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt"), "r") as notes:
+              lines = notes.readlines()
+              with open (os.path.expanduser("~/Documents/notes/ticketNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt"), "a") as finalNotes:
+                  finalNotes.writelines(lines)
+                  notes.close()
+                  finalNotes.close()
+              return
 
 
    def takeNote (self, event=None):
@@ -314,10 +311,10 @@ class Mywin(wx.Frame):
           def border():
               notes.write("\n*********************************************************\n")
               return
-
+          border()
           for item in prompts:
               notes.write(prompts[item] + item.GetValue() + "\n")
-
+          border()
       self.saveDocument()
       return
 
