@@ -304,7 +304,6 @@ class Mywin(wx.Frame):
                 return
 
 
-
    def takeNote (self, event=None):
       prompts = {self.t1 : "Customer Name: ", self.t2 : "TID:  ",
           self.t3 : "Call Driver: ", self.t5 : "Caller's Name: ",
@@ -318,7 +317,7 @@ class Mywin(wx.Frame):
 
           for item in prompts:
               notes.write(prompts[item] + item.GetValue() + "\n")
-          
+
       self.saveDocument()
       return
 
@@ -327,9 +326,6 @@ class Mywin(wx.Frame):
        prompts = [self.t1 , self.t2, self.t3, self.t4, self.t5, self.t6, self.t7, self.t8 , self.t9]
        for item in prompts:
            item.SetValue("")
-
-
-
 
 
    def ticket(self, event=None):
