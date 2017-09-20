@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.chrome.options import Options
 chrome_options = Options()
-chrome_options.add_argument("window-size=1280,720")
+chrome_options.add_argument("window-size=1360,1024")
 driver = webdriver.Chrome(chrome_options=chrome_options)
 
 
@@ -16,15 +16,10 @@ def click (button, event = None):
 
 def saveDocument ():
   with open(os.path.expanduser("~/Documents/notes/tempNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt"), "r") as notes:
-           lines = notes.readlines()
-           with open (os.path.expanduser("~/Documents/notes/ticketNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt"), "a") as finalNotes:
-               def border():
-                   finalNotes.write("\n*********************************************************\n")
-                   return
-               border()
-               finalNotes.writelines(lines)
-               border()
-           return
+      lines = notes.readlines()
+      with open (os.path.expanduser("~/Documents/notes/ticketNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt"), "a") as finalNotes:
+          finalNotes.writelines(lines)
+          return
 
 
 def login (website, username, password):
@@ -75,9 +70,9 @@ def getTarget ():
      _customer = linesOfBiz[str.split(inputNotes[1][0], ': ')[1]]
      _customerName = str.split(inputNotes[1][0], ': ')[1]
  else:
-     _customer = ("")
+     pass
 
- if str.split(inputNotes[2][0], ': ')[1] is None:
+ if str.split(inputNotes[2][0], ': ')[1] == " ":
      _TID = ("phone support")
  else:
      _TID = str.split(inputNotes[2][0], ': ')[1]
@@ -132,7 +127,6 @@ def documentThis ():
  with open (os.path.expanduser("~/Documents/notes/tempNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt"), "w") as notes:
      for item in prompts:
          notes.write(prompts[item]+" "+str.split(inputNotes[item][0], ': ')[1]+ "\n")
- saveDocument()
  return
 
 
@@ -150,12 +144,18 @@ def documentThat ():
     'rfc' : ('Reason for Call: ', driver.find_element_by_id("MainContent_ChildContent1_txtDescNotes").text + "\n"),
     'rn' : ('Resolution Notes: ', driver.find_element_by_id("MainContent_ChildContent1_txtResNotes").text + "\n")}
 
- with open (os.path.expanduser("~/Documents/notes/tempNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt"), "w") as notes:
-      for item in headers:
-             notes.write(headers[item][0] + headers[item][1])
-      print("Created: " + driver.find_element_by_id("MainContent_ChildContent1_lstViewResult_lblServiceCall_0").text)
-      saveDocument()
-      return
+ with open (os.path.expanduser("~/Documents/notes/ticketNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt"), "w") as notes:
+
+     def border():
+         notes.write("\n*********************************************************\n")
+         return
+     border()
+     for item in headers:
+
+         notes.write(headers[item][0] + headers[item][1])
+     border()
+     print("Created: " + driver.find_element_by_id("MainContent_ChildContent1_lstViewResult_lblServiceCall_0").text)
+     return
 
 
 class Mywin(wx.Frame):
@@ -299,7 +299,7 @@ class Mywin(wx.Frame):
       with open (os.path.expanduser("~/Documents/notes/tempNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt"), "w") as notes:
           for item in prompts:
               notes.write(prompts[item] + item.GetValue() + "\n")
-      saveDocument()
+
       return
 
 
@@ -326,9 +326,8 @@ class Mywin(wx.Frame):
        getTarget()
        makeTicket()
      #Creates .txt documents capturing call number created and  notes gathered for and submitted to this call
-       documentThis()
+       saveDocument()
        documentThat()
-     
        return
 
 

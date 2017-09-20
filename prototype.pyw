@@ -109,37 +109,37 @@ class Mywin(wx.Frame):
       self.Show()
       self.Fit()
 
-   def OnKeyTyped(self, event):
-      print (event.GetString())
+       def OnKeyTyped(self, event):
+          print (event.GetString())
 
-   def OnEnterPressed(self,event):
-      print ("Enter pressed")
+       def OnEnterPressed(self,event):
+          print ("Enter pressed")
 
-   def saveDocument (self):
-     with open("tempNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt", "r") as notes:
-              lines = notes.readlines()
-              with open ("ticketNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt", "a") as finalNotes:
-                  finalNotes.writelines(lines)
-                  notes.close()
-                  finalNotes.close()
-              return
+       def saveDocument (self):
+         with open("tempNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt", "r") as notes:
+                  lines = notes.readlines()
+                  with open ("ticketNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt", "a") as finalNotes:
+                      finalNotes.writelines(lines)
+                      notes.close()
+                      finalNotes.close()
+                  return
 
-   def takeNote (self, event=None):
-      prompts = ({self.t1 : "Customer Name: ", self.t2 : "TID:  ",
-          self.t3 : "Call Driver: ", self.t5 : "Caller's Name: ",
-          self.t6 : "Phone Number: ", self.t4 : "Serial Number: ",
-          self.t7 : "Street Address: ", self.t8 : "ZIP or Postal Code: ",
-          self.t9 : "Notes: "})
-      with open ("tempNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt", "w") as notes:
-          def border():
-              notes.write("\n*********************************************************\n")
-              return
-          border()
-          for item in prompts:
-              notes.write(prompts[item] + item.GetValue() + "\n")
-          border()
-      self.saveDocument()
-      return
+       def takeNote (self, event=None):
+          prompts = ({self.t1 : "Customer Name: ", self.t2 : "TID:  ",
+              self.t3 : "Call Driver: ", self.t5 : "Caller's Name: ",
+              self.t6 : "Phone Number: ", self.t4 : "Serial Number: ",
+              self.t7 : "Street Address: ", self.t8 : "ZIP or Postal Code: ",
+              self.t9 : "Notes: "})
+          with open ("tempNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt", "w") as notes:
+              def border():
+                  notes.write("\n*********************************************************\n")
+                  return
+              border()
+              for item in prompts:
+                  notes.write(prompts[item] + item.GetValue() + "\n")
+              border()
+          self.saveDocument()
+          return
 
 
 app = wx.App()
