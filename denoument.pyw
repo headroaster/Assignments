@@ -14,6 +14,19 @@ def click (button, event = None):
  return
 
 
+def saveDocument ():
+  with open(os.path.expanduser("~/Documents/notes/tempNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt"), "r") as notes:
+           lines = notes.readlines()
+           with open (os.path.expanduser("~/Documents/notes/ticketNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt"), "a") as finalNotes:
+               def border():
+                   finalNotes.write("\n*********************************************************\n")
+                   return
+               border()
+               finalNotes.writelines(lines)
+               border()
+           return
+
+
 def login (website, username, password):
  driver.get(website)
  driver.find_element_by_id("txtName").send_keys(username)
@@ -59,23 +72,20 @@ def getTarget ():
  _Zip = ""
 
  if str.split(inputNotes[1][0], ': ')[1] in linesOfBiz:
-     customer = linesOfBiz[str.split(inputNotes[1][0], ': ')[1]]
-     customerName = str.split(inputNotes[1][0], ': ')[1]
-
+     _customer = linesOfBiz[str.split(inputNotes[1][0], ': ')[1]]
+     _customerName = str.split(inputNotes[1][0], ': ')[1]
  else:
      _customer = ("")
 
- if str.split(inputNotes[2][0], ': ')[1] != (""):
-     _TID = str.split(inputNotes[2][0], ': ')[1]
-     #_customer = ""
-
- else:
+ if str.split(inputNotes[2][0], ': ')[1] is None:
      _TID = ("phone support")
+ else:
+     _TID = str.split(inputNotes[2][0], ': ')[1]
 
  if _customer != ("") or _customer not in tidels:
      pass
  else:
-     _Serial = inputNotes[8]
+     _Serial = str.split(inputNotes[6][0], ': ')[1]
      _customer = ("")
 
  #This selects for either a specific or generic ticket using any combination of the 6 available fields.
@@ -101,8 +111,8 @@ def makeTicket ():
   driver.find_element_by_id("ddlTask").send_keys("ITS - Internal Tech Support")
   click("btnSubmitTask")
   dismissAlert()
-  notes = {'txtProbDesc' : inputNotes['callDriver'], 'txtCallerName' : inputNotes['caller'],
-            'txtCustPhone' : inputNotes['callBack'], 'txtResolutionNotes' : inputNotes['notes'],
+  notes = {'txtProbDesc' : str.split(inputNotes[3][0], ': ')[1], 'txtCallerName' : str.split(inputNotes[4][0], ': ')[1],
+            'txtCustPhone' : str.split(inputNotes[5][0], ': ')[1], 'txtResolutionNotes' : str.split(inputNotes[9][0], ': ')[1],
             'ddlCategory' : 'EFT', 'ddlProblemCode' : 'other', 'ddlRepairAction' : 'fixed'}
   for item in notes:
       driver.find_element_by_id(item).send_keys(notes[item])
@@ -114,15 +124,14 @@ def makeTicket ():
 
 
 def documentThis ():
- prompts = {"customerName" : "Customer Name: ", "tid" : "TID:  ",
-     "callDriver" : "Call Driver: ", "caller" : "Caller's Name: ",
-     "callBack" : "Phone Number: ", "serial" : "Serial Number: ",
-     "address" : "Street Address: ", "zip" : "ZIP or Postal Code: ",
-     "notes" : "Notes: "}
+ prompts = {1 : "Customer Name: ", 2 : "TID:  ",
+     3 : "Call Driver: ", 4 : "Caller's Name: ",
+     5 : "Phone Number: ", 6 : "Serial Number: ",
+     7 : "Street Address: ", 8 : "ZIP or Postal Code: ",
+     9 : "Notes: "}
  with open (os.path.expanduser("~/Documents/notes/tempNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt"), "w") as notes:
      for item in prompts:
-         notes.write(prompts[item]+inputNotes[item]+ "\n")
-
+         notes.write(prompts[item]+" "+str.split(inputNotes[item][0], ': ')[1]+ "\n")
  saveDocument()
  return
 
@@ -130,7 +139,7 @@ def documentThis ():
 def documentThat ():
  spacer = "  "
  headers = {'scn' : ('Service Call Number: ', driver.find_element_by_id("MainContent_ChildContent1_lstViewResult_lblServiceCall_0").text + "\n"),
-    'cf' : ('Created for: ' , inputNotes['customerName']+ "\n"),
+    'cf' : ('Created for: ' , str.split(inputNotes[1][0], ': ')[1]+ "\n"),
     'cn' : ('Caller Name: ', driver.find_element_by_id("MainContent_ChildContent1_lstViewResult_Label1_0").text + "\n"),
     'sna' : ('Store Name and Address: ', "\n" + driver.find_element_by_id("MainContent_ChildContent1_lstViewResult_lblSiteLoc_0").text + "\n"),
     'add' : (spacer, driver.find_element_by_id("MainContent_ChildContent1_lstViewResult_lblAddress1_0").text + "\n"),
@@ -144,7 +153,7 @@ def documentThat ():
  with open (os.path.expanduser("~/Documents/notes/tempNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt"), "w") as notes:
       for item in headers:
              notes.write(headers[item][0] + headers[item][1])
-             print("Created: " + driver.find_element_by_id("MainContent_ChildContent1_lstViewResult_lblServiceCall_0").text)
+      print("Created: " + driver.find_element_by_id("MainContent_ChildContent1_lstViewResult_lblServiceCall_0").text)
       saveDocument()
       return
 
@@ -281,19 +290,6 @@ class Mywin(wx.Frame):
       print ("Enter pressed")
 
 
-   def saveDocument (self):
-     with open(os.path.expanduser("~/Documents/notes/tempNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt"), "r") as notes:
-              lines = notes.readlines()
-              with open (os.path.expanduser("~/Documents/notes/ticketNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt"), "a") as finalNotes:
-                  def border():
-                      finalNotes.write("\n*********************************************************\n")
-                      return
-                  border()
-                  finalNotes.writelines(lines)
-                  border()
-              return
-
-
    def takeNote (self, event=None):
       prompts = {self.t1 : "Customer Name: ", self.t2 : "TID:  ",
           self.t3 : "Call Driver: ", self.t5 : "Caller's Name: ",
@@ -303,7 +299,7 @@ class Mywin(wx.Frame):
       with open (os.path.expanduser("~/Documents/notes/tempNotes." + datetime.date.today().strftime("%m.%d.%Y") + ".txt"), "w") as notes:
           for item in prompts:
               notes.write(prompts[item] + item.GetValue() + "\n")
-      self.saveDocument()
+      saveDocument()
       return
 
 
@@ -332,8 +328,7 @@ class Mywin(wx.Frame):
      #Creates .txt documents capturing call number created and  notes gathered for and submitted to this call
        documentThis()
        documentThat()
-     #Closes the browser
-       driver.close()
+     
        return
 
 
